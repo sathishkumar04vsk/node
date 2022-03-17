@@ -1,8 +1,10 @@
 import dotenv from "dotenv";
 import express from "express";
+import cors from "cors";
 import { MongoClient } from "mongodb";
 const app = express();
 dotenv.config();
+app.use(cors());
 
 const PORT = process.env.PORT;
 const Movies = [
