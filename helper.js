@@ -1,11 +1,16 @@
 import { client } from "./index.js";
+import { ObjectId } from "mongodb";
 
 async function getAllMovies() {
   return await client.db("b30wd").collection("movies").find({}).toArray();
 }
 
 async function getMovieByid(id) {
-  return await client.db("b30wd").collection("movies").findOne({ id: id });
+  console.log(id, ObjectId(id));
+  return await client
+    .db("b30wd")
+    .collection("movies")
+    .findOne({ _id: ObjectId(id) });
 }
 
 async function createMovies(data) {
@@ -16,11 +21,14 @@ async function updateMovieByid(id, updateData) {
   return await client
     .db("b30wd")
     .collection("movies")
-    .updateOne({ id: id }, { $set: updateData });
+    .updateOne({ _id: ObjectId(id) }, { $set: updateData });
 }
 
 async function deleteMovieByid(id) {
-  return await client.db("b30wd").collection("movies").deleteOne({ id: id });
+  return await client
+    .db("b30wd")
+    .collection("movies")
+    .deleteOne({ _id: ObjectId(id) });
 }
 
 // authntication and authurization

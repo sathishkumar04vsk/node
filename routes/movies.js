@@ -17,7 +17,7 @@ router.get("/", auth, async function (request, response) {
 });
 
 // get Movie by id
-router.get("/:id", auth, async function (request, response) {
+router.get("/:id", async function (request, response) {
   // console.log(request.params); // filter | find
   const { id } = request.params;
   // const movie = Movies.find((mv) => mv.id === id);
