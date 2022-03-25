@@ -7,16 +7,17 @@ import {
   updateMovieByid,
   deleteMovieByid,
 } from "../helper.js";
+import { auth } from "../middleware/auth.js";
 
 const router = express.Router();
 // get all movies
-router.get("/", async function (request, response) {
+router.get("/", auth, async function (request, response) {
   const movies = await getAllMovies();
   response.send(movies);
 });
 
 // get Movie by id
-router.get("/:id", async function (request, response) {
+router.get("/:id", auth, async function (request, response) {
   // console.log(request.params); // filter | find
   const { id } = request.params;
   // const movie = Movies.find((mv) => mv.id === id);
@@ -27,7 +28,7 @@ router.get("/:id", async function (request, response) {
 });
 
 // create a movies data
-router.post("/", async function (request, response) {
+router.post("/", auth, async function (request, response) {
   const data = request.body;
   console.log(data);
   const result = await createMovies(data);
